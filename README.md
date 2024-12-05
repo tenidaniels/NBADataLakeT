@@ -33,14 +33,14 @@ S3: s3:CreateBucket, s3:PutObject, s3:DeleteBucket, s3:ListBucket
 Glue: glue:CreateDatabase, glue:CreateTable, glue:DeleteDatabase, glue:DeleteTable
 Athena: athena:StartQueryExecution, athena:GetQueryResults
 
-#START HERE 
-#Step 1: Open CloudShell Console
+# START HERE 
+# Step 1: Open CloudShell Console
 
 Go to aws.amazon.com & sign into your account
 
 In the top, next to the search bar you will see a square with a >_ inside, click this to open the CloudShell
 
-#Step 2: Create the setup_nba_data_lake.py file
+# Step 2: Create the setup_nba_data_lake.py file
 In the CLI (Command Line Interface), type nano setup_nba_data_lake.py
 
 In another window, go to https://github.com/alahl1/NBADataLake
@@ -51,13 +51,13 @@ Go back to the Cloudshell window and paste the contents inside the file.
 Press ^X to exit, press Y to save the file, press enter to confirm the file name 
 
 
-#Step 3: Run the script
+# Step 3: Run the script
 In the CLI type
 python3 setup_nba_data_lake.py
 
 You should see the resources were successfully created, the sample data was uploaded successfully and the Data Lake Setup Completed
 
-#Step 4: Manually Check For The Resources
+# Step 4: Manually Check For The Resources
 In the Search Bar, type S3 and click blue hyper link name
 You should see 2 General purpose bucket named "Sports-analytics-data-lake"
 When you click the bucket name you will see 3 objects are in the bucket

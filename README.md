@@ -15,11 +15,17 @@ Before running the script, ensure you have the following:
 Go to Sportsdata.io and create a free account
 At the top left, you should see "Developers", if you hover over it you should see "API Resources"
 Click on "Introduction & Testing"
+
 Click on "SportsDataIO API Free Trial" and fill out the information & be sure to select NBA for this tutorial
+
 You will get an email and at the bottom it says "Launch Developer Portal"
+
 By default it takes you to the NFL, on the left click on NBA
+
 Scroll down until you see "Standings"
+
 You'll "Query String Parameters", the value in the drop down box is your API key. 
+
 Copy this string because you will need to paste it later in the script
 
 IAM Role/Permissions: Ensure the user or role running the script has the following permissions:
@@ -57,9 +63,13 @@ You should see the resources were successfully created, the sample data was uplo
 
 # Step 4: Manually Check For The Resources
 In the Search Bar, type S3 and click blue hyper link name
+
 You should see 2 General purpose bucket named "Sports-analytics-data-lake"
+
 When you click the bucket name you will see 3 objects are in the bucket
+
 Click on raw-data and you will see it contains "nba_player_data.json"
+
 Click the file name and at the top you will see the option to Open the file
 
 You'll see a long string of various NBA data

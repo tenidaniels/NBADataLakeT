@@ -1,12 +1,17 @@
 import boto3
 import json
 import time
+import requests
 
 # AWS configurations
 region = "us-east-1"  # Replace with your preferred AWS region
 bucket_name = "sports-analytics-data-lake"  # Change to a unique S3 bucket name
 glue_database_name = "glue_nba_data_lake"
 athena_output_location = f"s3://{bucket_name}/athena-results/"
+
+# Sportsdata.io configurations
+api_key = "your_sportsdata_api_key"  # Replace with your sportsdata.io API key
+nba_endpoint = "https://api.sportsdata.io/v3/nba/scores/json/Players"
 
 # Create AWS clients
 s3_client = boto3.client("s3", region_name=region)
@@ -40,22 +45,33 @@ def create_glue_database():
     except Exception as e:
         print(f"Error creating Glue database: {e}")
 
-def upload_sample_data_to_s3():
-    """Upload a sample JSON file to the S3 bucket."""
-    sample_data = [
-        {"player": "LeBron James", "team": "Lakers", "points": 30},
-        {"player": "Stephen Curry", "team": "Warriors", "points": 40},
-    ]
+def fetch_nba_data():
+    """Fetch NBA player data from sportsdata.io."""
     try:
-        time.sleep(5)  # Wait for bucket propagation
+        headers = {"Ocp-Apim-Subscription-Key": api_key}
+        response = requests.get(nba_endpoint, headers=headers)
+        response.raise_for_status()  # Raise an error for bad status codes
+        print("Fetched NBA data successfully.")
+        return response.json()  # Return JSON response
+    except Exception as e:
+        print(f"Error fetching NBA data: {e}")
+        return []
+
+def upload_data_to_s3(data):
+    """Upload NBA data to the S3 bucket."""
+    try:
+        # Define S3 object key
+        file_key = "raw-data/nba_player_data.json"
+        
+        # Upload JSON data to S3
         s3_client.put_object(
             Bucket=bucket_name,
-            Key="raw-data/nba_sample_data.json",
-            Body=json.dumps(sample_data),
+            Key=file_key,
+            Body=json.dumps(data)
         )
-        print("Sample data uploaded to S3 successfully.")
+        print(f"Uploaded data to S3: {file_key}")
     except Exception as e:
-        print(f"Error uploading sample data to S3: {e}")
+        print(f"Error uploading data to S3: {e}")
 
 def create_glue_table():
     """Create a Glue table for the data."""
@@ -66,9 +82,11 @@ def create_glue_table():
                 "Name": "nba_players",
                 "StorageDescriptor": {
                     "Columns": [
-                        {"Name": "player", "Type": "string"},
-                        {"Name": "team", "Type": "string"},
-                        {"Name": "points", "Type": "int"},
+                        {"Name": "PlayerID", "Type": "int"},
+                        {"Name": "FirstName", "Type": "string"},
+                        {"Name": "LastName", "Type": "string"},
+                        {"Name": "Team", "Type": "string"},
+                        {"Name": "Position", "Type": "string"},
                     ],
                     "Location": f"s3://{bucket_name}/raw-data/",
                     "InputFormat": "org.apache.hadoop.mapred.TextInputFormat",
@@ -102,7 +120,9 @@ def main():
     create_s3_bucket()
     time.sleep(5)  # Ensure bucket creation propagates
     create_glue_database()
-    upload_sample_data_to_s3()
+    nba_data = fetch_nba_data()
+    if nba_data:  # Only proceed if data was fetched successfully
+        upload_data_to_s3(nba_data)
     create_glue_table()
     configure_athena()
     print("Data lake setup complete.")

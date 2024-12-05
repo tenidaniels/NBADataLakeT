@@ -12,20 +12,15 @@ Configures Amazon Athena for querying data stored in the S3 bucket.
 # Prerequisites
 Before running the script, ensure you have the following:
 
-AWS Account:
-
-An active AWS account with permissions to create and manage resources in S3, Glue, and Athena.
-Python:
-
-Python 3.7 or higher installed on your local machine or environment (e.g., AWS CloudShell, EC2).
-Python Libraries:
-
-Install the following libraries:
-pip install boto3
-
-AWS CLI
-aws configure
-Provide your AWS Access Key, Secret Key, Default Region, and Output Format
+Go to Sportsdata.io and create a free account
+At the top left, you should see "Developers", if you hover over it you should see "API Resources"
+Click on "Introduction & Testing"
+Click on "SportsDataIO API Free Trial" and fill out the information & be sure to select NBA for this tutorial
+You will get an email and at the bottom it says "Launch Developer Portal"
+By default it takes you to the NFL, on the left click on NBA
+Scroll down until you see "Standings"
+You'll "Query String Parameters", the value in the drop down box is your API key. 
+Copy this string because you will need to paste it later in the script
 
 IAM Role/Permissions: Ensure the user or role running the script has the following permissions:
 
@@ -47,6 +42,9 @@ In another window, go to https://github.com/alahl1/NBADataLake
 Copy the contents inside the setup_nba_data_lake.py file
 
 Go back to the Cloudshell window and paste the contents inside the file.
+
+Find the line of code under #Sportsdata.io configurations that says "api_key" 
+paste your api key inside the quotations
 
 Press ^X to exit, press Y to save the file, press enter to confirm the file name 
 

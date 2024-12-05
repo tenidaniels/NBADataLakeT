@@ -59,10 +59,8 @@ You should see the resources were successfully created, the sample data was uplo
 In the Search Bar, type S3 and click blue hyper link name
 You should see 2 General purpose bucket named "Sports-analytics-data-lake"
 When you click the bucket name you will see 3 objects are in the bucket
-Click on raw-data and you will see it contains "nba_sample_data.json"
+Click on raw-data and you will see it contains "nba_player_data.json"
 Click the file name and at the top you will see the option to Open the file
-The contents should look like this:
-[
-    {"player": "LeBron James", "team": "Lakers", "points": 30},
-    {"player": "Stephen Curry", "team": "Warriors", "points": 40}
-]
+
+You'll see a long string of various NBA data
+

@@ -48,7 +48,8 @@ nano setup_nba_data_lake.py
 ```
 
 
-2. In another window, go to [GitHub]([https://sportsdata.io/](https://github.com/alahl1/NBADataLake))
+2. In another window, go to [GitHub](https://github.com/alahl1/NBADataLake)
+
 -Copy the contents inside the setup_nba_data_lake.py file
 
 -Go back to the Cloudshell window and paste the contents inside the file.

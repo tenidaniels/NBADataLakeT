@@ -94,6 +94,16 @@ python3 setup_nba_data_lake.py
 
 -You'll see a long string of various NBA data
 
+4. Head over to Amazon Athena and you could paste the following sample query:
+```bash
+SELECT FirstName, LastName, Position, Team
+FROM nba_players
+WHERE Position = 'PG';
+```
+
+-Click Run
+-You should see an output if you scroll down under "Query Results"
+
 ### **What We Learned**
 1. Securing AWS services with least privilege IAM policies.
 2. Automating the creation of services with a script.

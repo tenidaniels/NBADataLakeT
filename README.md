@@ -55,13 +55,24 @@ paste your api key inside the quotations
 Press ^X to exit, press Y to save the file, press enter to confirm the file name 
 
 
-# Step 3: Run the script
+# Step 3: Create .env file
+In the CLI (Command Line Interface), type nano .env
+
+paste the following line of code into your file, ensure you swap out with your API key
+
+SPORTS_DATA_API_KEY=your_sportsdata_api_key
+NBA_ENDPOINT=https://api.sportsdata.io/v3/nba/scores/json/Players
+
+Press ^X to exit, press Y to save the file, press enter to confirm the file name 
+
+
+# Step 4: Run the script
 In the CLI type
 python3 setup_nba_data_lake.py
 
 You should see the resources were successfully created, the sample data was uploaded successfully and the Data Lake Setup Completed
 
-# Step 4: Manually Check For The Resources
+# Step 5: Manually Check For The Resources
 In the Search Bar, type S3 and click blue hyper link name
 
 You should see 2 General purpose bucket named "Sports-analytics-data-lake"

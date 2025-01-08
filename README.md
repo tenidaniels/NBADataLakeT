@@ -37,51 +37,70 @@ Athena: athena:StartQueryExecution, athena:GetQueryResults
 # START HERE 
 # Step 1: Open CloudShell Console
 
-Go to aws.amazon.com & sign into your account
+1. Go to aws.amazon.com & sign into your account
 
-In the top, next to the search bar you will see a square with a >_ inside, click this to open the CloudShell
+2. In the top, next to the search bar you will see a square with a >_ inside, click this to open the CloudShell
 
 # Step 2: Create the setup_nba_data_lake.py file
-In the CLI (Command Line Interface), type nano setup_nba_data_lake.py
+1. In the CLI (Command Line Interface), type
+```bash
+nano setup_nba_data_lake.py
+```
 
-In another window, go to https://github.com/alahl1/NBADataLake
-Copy the contents inside the setup_nba_data_lake.py file
 
-Go back to the Cloudshell window and paste the contents inside the file.
+2. In another window, go to [My Github Repo]([https://sportsdata.io/](https://github.com/alahl1/NBADataLake))
+-Copy the contents inside the setup_nba_data_lake.py file
 
-Find the line of code under #Sportsdata.io configurations that says "api_key" 
+-Go back to the Cloudshell window and paste the contents inside the file.
+
+3. Find the line of code under #Sportsdata.io configurations that says "api_key" 
 paste your api key inside the quotations
 
-Press ^X to exit, press Y to save the file, press enter to confirm the file name 
+4. Press ^X to exit, press Y to save the file, press enter to confirm the file name 
 
 
 # Step 3: Create .env file
-In the CLI (Command Line Interface), type nano .env
-
-paste the following line of code into your file, ensure you swap out with your API key
-
+1. In the CLI (Command Line Interface), type
+```bash
+nano .env
+```
+2. paste the following line of code into your file, ensure you swap out with your API key
+```bash
 SPORTS_DATA_API_KEY=your_sportsdata_api_key
 NBA_ENDPOINT=https://api.sportsdata.io/v3/nba/scores/json/Players
+```
 
-Press ^X to exit, press Y to save the file, press enter to confirm the file name 
+3. Press ^X to exit, press Y to save the file, press enter to confirm the file name 
 
 
 # Step 4: Run the script
-In the CLI type
+1. In the CLI type
+```bash
 python3 setup_nba_data_lake.py
-
-You should see the resources were successfully created, the sample data was uploaded successfully and the Data Lake Setup Completed
+```
+-You should see the resources were successfully created, the sample data was uploaded successfully and the Data Lake Setup Completed
 
 # Step 5: Manually Check For The Resources
-In the Search Bar, type S3 and click blue hyper link name
+1. In the Search Bar, type S3 and click blue hyper link name
 
-You should see 2 General purpose bucket named "Sports-analytics-data-lake"
+-You should see 2 General purpose bucket named "Sports-analytics-data-lake"
 
-When you click the bucket name you will see 3 objects are in the bucket
+-When you click the bucket name you will see 3 objects are in the bucket
 
-Click on raw-data and you will see it contains "nba_player_data.json"
+2. Click on raw-data and you will see it contains "nba_player_data.json"
 
-Click the file name and at the top you will see the option to Open the file
+3. Click the file name and at the top you will see the option to Open the file
 
-You'll see a long string of various NBA data
+-You'll see a long string of various NBA data
+
+### **What We Learned**
+1. Securing AWS services with least privilege IAM policies.
+2. Automating the creation of services with a script.
+3. Integrating external APIs into cloud-based workflows.
+
+
+### **Future Enhancements**
+1. Automate data ingestion with AWS Lambda
+2. Implement a data transformation layer with AWS Glue ETL
+3. Add advanced analytics and visualizations (AWS QuickSight)
 

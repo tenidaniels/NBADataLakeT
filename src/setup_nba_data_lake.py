@@ -62,17 +62,25 @@ def fetch_nba_data():
         print(f"Error fetching NBA data: {e}")
         return []
 
+def convert_to_line_delimited_json(data):
+    """Convert data to line-delimited JSON format."""
+    print("Converting data to line-delimited JSON format...")
+    return "\n".join([json.dumps(record) for record in data])
+
 def upload_data_to_s3(data):
     """Upload NBA data to the S3 bucket."""
     try:
+        # Convert data to line-delimited JSON
+        line_delimited_data = convert_to_line_delimited_json(data)
+
         # Define S3 object key
-        file_key = "raw-data/nba_player_data.json"
-        
+        file_key = "raw-data/nba_player_data.jsonl"
+
         # Upload JSON data to S3
         s3_client.put_object(
             Bucket=bucket_name,
             Key=file_key,
-            Body=json.dumps(data)
+            Body=line_delimited_data
         )
         print(f"Uploaded data to S3: {file_key}")
     except Exception as e:
@@ -92,6 +100,7 @@ def create_glue_table():
                         {"Name": "LastName", "Type": "string"},
                         {"Name": "Team", "Type": "string"},
                         {"Name": "Position", "Type": "string"},
+                        {"Name": "Points", "Type": "int"}
                     ],
                     "Location": f"s3://{bucket_name}/raw-data/",
                     "InputFormat": "org.apache.hadoop.mapred.TextInputFormat",

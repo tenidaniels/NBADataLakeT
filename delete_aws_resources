@@ -5,6 +5,19 @@ from botocore.exceptions import ClientError
 BUCKET_NAME = "sports-analytics-data-lake"
 GLUE_DATABASE_NAME = "glue_nba_data_lake"
 
+def delete_athena_query_results(bucket_name):
+    """Delete Athena query results stored in the specified S3 bucket."""
+    s3 = boto3.client("s3")
+    try:
+        print(f"Deleting Athena query results in bucket: {bucket_name}")
+        objects = s3.list_objects_v2(Bucket=bucket_name, Prefix="athena-results/")
+        if "Contents" in objects:
+            for obj in objects["Contents"]:
+                s3.delete_object(Bucket=bucket_name, Key=obj["Key"])
+                print(f"Deleted Athena query result: {obj['Key']}")
+    except ClientError as e:
+        print(f"Error deleting Athena query results in bucket {bucket_name}: {e}")
+
 def delete_s3_bucket(bucket_name):
     """Delete a specific S3 bucket and its contents."""
     s3 = boto3.client("s3")
@@ -38,19 +51,6 @@ def delete_glue_resources(database_name):
         print(f"Deleted Glue database: {database_name}")
     except ClientError as e:
         print(f"Error deleting Glue resources for database {database_name}: {e}")
-
-def delete_athena_query_results(bucket_name):
-    """Delete Athena query results stored in the specified S3 bucket."""
-    s3 = boto3.client("s3")
-    try:
-        print(f"Deleting Athena query results in bucket: {bucket_name}")
-        objects = s3.list_objects_v2(Bucket=bucket_name, Prefix="athena-results/")
-        if "Contents" in objects:
-            for obj in objects["Contents"]:
-                s3.delete_object(Bucket=bucket_name, Key=obj["Key"])
-                print(f"Deleted Athena query result: {obj['Key']}")
-    except ClientError as e:
-        print(f"Error deleting Athena query results in bucket {bucket_name}: {e}")
 
 def main():
     print("Deleting resources created during data lake setup...")

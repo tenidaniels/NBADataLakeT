@@ -48,7 +48,7 @@ nano setup_nba_data_lake.py
 ```
 
 
-2. In another window, go to [GitHub](https://github.com/alahl1/NBADataLake)
+2. In another window, go to [GitHub](https://github.com/tenidaniels/NBADataLakeT)
 
 -Copy the contents inside the setup_nba_data_lake.py file
 
@@ -100,16 +100,6 @@ SELECT FirstName, LastName, Position, Team
 FROM nba_players
 WHERE Position = 'PG';
 ```
-
--Click Run
--You should see an output if you scroll down under "Query Results"
-
-### **What We Learned**
-1. Securing AWS services with least privilege IAM policies.
-2. Automating the creation of services with a script.
-3. Integrating external APIs into cloud-based workflows.
-
-
 ### **Future Enhancements**
 1. Automate data ingestion with AWS Lambda
 2. Implement a data transformation layer with AWS Glue ETL
